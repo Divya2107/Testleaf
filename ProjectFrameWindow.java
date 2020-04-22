@@ -36,11 +36,12 @@ public class ProjectFrameWindow {
 
 	// 3. Enter Incident in filter navigator and press enter
 	driver.findElementByXPath("//input[@id='filter']").sendKeys("Incident",Keys.ENTER);
+	Thread.sleep(4000);
 
 	// 4. Click on Create new option Under Incident
 
 	driver.findElementByXPath("(//div[text()='Create New'])[1]").click();
-
+	Thread.sleep(4000);
 	
 	//5. Get the text of Number Field and Store it in a String
 	
@@ -55,7 +56,8 @@ public class ProjectFrameWindow {
 	
 	// 6. Click on the Search Button Available in the Caller Field & Choose First Value Opened in the new Window
 	
-	driver.findElementByXPath("//button[@id='lookup.incident.caller_id']").click();
+	//driver.findElementByXPath("//button[@id='lookup.incident.caller_id']").click();
+	driver.findElementById("lookup.incident.caller_id").click();
 	Thread.sleep(5000);
 	
 	// Get all window handles
@@ -99,7 +101,7 @@ public class ProjectFrameWindow {
 			
 			//12. Click on the Search Button Available in the Assignment Group & Choose Last Residing Value Opened in new Window
 			driver.findElementByXPath("//button[@id='lookup.incident.assignment_group']").click();
-			Thread.sleep(7000);
+			Thread.sleep(5000);
 			List<String> list1 = new ArrayList<String>(driver.getWindowHandles());
 			driver.switchTo().window(list1.get(1));
 			//Choose Last Residing Value Opened in new Window
@@ -148,13 +150,17 @@ public class ProjectFrameWindow {
 			
 			//19. Update Description as "Successfully Created an incident"
 			
-			driver.findElementByXPath("//input[@id='incident.short_description']").sendKeys("Successfully Created an incident");
+			WebElement description = driver.findElementByXPath("//input[@id='incident.short_description']");
+			description.clear();
+			description.sendKeys("Successfully Created an incident");
 			//driver.findElementByXPath("//input[@id='incident.short_description']").sendKeys(Keys.TAB);
 			
 			//20. Enter Work Notes as "Done Right"
 			//driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
-			Thread.sleep(7000);
-			driver.findElementById("activity-stream-textarea").sendKeys(Keys.SPACE,Keys.BACK_SPACE,"Done Right");
+			
+			driver.findElementByXPath("(//textarea[@aria-label='Work notes'])[3]").sendKeys("Done Right");
+			//driver.findElementById("activity-stream-textarea").sendKeys("Done Right");
+			//driver.findElementById("activity-stream-textarea").sendKeys(Keys.SPACE,Keys.BACK_SPACE,"Done Right");
 			//driver.findElementByXPath("//textarea[@id='activity-stream-textarea']").sendKeys("Done Right");
 			
 			//21. Click on the Update button.
